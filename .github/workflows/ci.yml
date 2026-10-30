@@ -52,7 +52,7 @@ jobs:
         if: github.ref_type == 'tag'
         shell: bash
         run: python tools/build_release.py --tag "$GITHUB_REF_NAME"
-      - name: Build the candidate package
+      - name: Build the release package
         if: github.ref_type != 'tag'
         run: python tools/build_release.py
       - uses: actions/upload-artifact@v4
@@ -74,10 +74,10 @@ jobs:
             dist/holdup-*.zip
             dist/SHA256SUMS
 
-  candidate:
-    name: Publish release candidate
+  release:
+    name: Publish release
     needs: checks
-    if: github.event_name == 'push' && github.ref_type == 'tag' && contains(github.ref_name, '-rc.')
+    if: github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -111,13 +111,17 @@ jobs:
       - name: Record actual CI validation results
         shell: bash
         run: python tools/build_validation_record.py .dev/validated-reports "dist/validation-${GITHUB_REF_NAME#v}.json"
-      - name: Publish the candidate and installation files
+      - name: Publish the release and installation files
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
+          release_flags=(--latest)
+          if [[ "$GITHUB_REF_NAME" == *-rc.* ]]; then
+            release_flags=(--prerelease)
+          fi
           gh release create "$GITHUB_REF_NAME" \
-            --verify-tag --prerelease \
+            --verify-tag "${release_flags[@]}" \
             --title "HoldUp ${GITHUB_REF_NAME#v}" \
             --notes-file release/RELEASE_NOTES.md \
             dist/holdup-*.ankiaddon dist/holdup-*.zip dist/SHA256SUMS dist/validation-*.json

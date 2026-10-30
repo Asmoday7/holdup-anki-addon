@@ -1,37 +1,35 @@
-# HoldUp 1.0.0-rc.3
+# HoldUp 1.0.0
 
-This is a **release candidate**, intended for final desktop testing before 1.0.0.
-Manual Windows 11 validation and a real study-day crossing are still open gates.
-The attached `validation-*.json` records the four actual CI jobs, their test
-counts and queue benchmarks. It deliberately leaves the manual Windows gates open.
+The first stable release of HoldUp: schedule another look at a card while keeping
+its normal Anki/FSRS review. Show the answer, press HoldUp, then give the original
+your normal Again, Hard, Good or Easy rating.
 
-HoldUp adds extra practice alongside your normal Anki/FSRS reviews. Press HoldUp,
-then choose a normal Anki rating for the original. Each new HoldUp press adds an
-independent extra appearance; Repeat and Done affect only the appearance on screen.
+- Extra practice appears in the same reviewer, with no separate window.
+- Choose 1 second to 24 hours, or the next Anki study day using Anki's day-start setting.
+- Every HoldUp press adds an independent appearance. Earlier appointments keep their deadlines.
+- Repeat and Done affect only the extra appearance on screen, without submitting an FSRS rating.
+- Native ratings, daily new-card limits and Undo/Redo remain available.
+- Ready counts and deck-list clock badges make extra practice visible.
+- English and Russian are included in one package and follow Anki's language.
+- Existing HoldUp appointments are preserved when upgrading.
 
-This candidate makes queue-error recovery checks deterministic and verifies Anki’s
-complete native application shutdown. Runtime behavior is unchanged from rc.1.
+Runtime code is unchanged from 1.0.0-rc.3, apart from the version number.
+On 30 October 2026 the owner reported completing all requested manual checks
+after approximately a week of use and approved stable publication.
+The attached validation JSON records this attributed report separately from the
+actual Windows/Linux CI results for Anki 26.09 and 26.09.3.
 
-Included:
+Install `holdup-1.0.0.ankiaddon` through **Tools → Add-ons → Install from file**, then
+restart Anki. Keep one enabled copy. Upload the same `.ankiaddon` to AnkiWeb;
+the identical `.zip` is available if the upload form explicitly requires ZIP.
 
-- Extra appearances in the existing reviewer, with no separate practice window.
-- Intervals from 1 second to 24 hours and Next Anki study day.
-- Ready counts and passive deck-list badges.
-- Native ratings, daily new-card limits and independent practice Undo/Redo.
-- English and Russian interfaces in one package.
-- Faster clearing of large queues and a 2000-appearance regression.
-- Deferred overview-footer updates while Anki is loading its native pages.
-- AGPL-3.0-or-later license, included in the archive with source and project notice.
-- Reproducible installers and checksums; Windows/Linux CI for Anki 26.09 and 26.09.3.
+Support is one desktop installation per collection. Full collection `.colpkg`
+exports and native backups preserve the queue; a deck `.apkg` does not transfer
+the complete queue. Live multi-device conflict resolution is unverified.
+AnkiDroid and AnkiMobile do not run this desktop add-on.
 
-Install `holdup-1.0.0-rc.3.ankiaddon` through Tools → Add-ons → Install from file,
-then fully restart Anki. Keep one enabled copy. Existing appointments are retained.
-The `.zip` upload archive contains identical bytes; use the `.ankiaddon` for installation.
-
-First-release support is one desktop installation per collection. Full collection
-exports and native backups preserve appointments; deck `.apkg` export does not
-carry the complete queue. Live multi-device sync/conflict resolution is unverified.
-AnkiDroid and AnkiMobile do not run this add-on.
+Free and open source under AGPL-3.0-or-later. Source, license and project notice
+are included in the archive.
 
 [User guide](https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.md) ·
 [Русская инструкция](https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.ru.md) ·

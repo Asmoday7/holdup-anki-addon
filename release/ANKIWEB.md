@@ -1,42 +1,62 @@
-# AnkiWeb submission kit
+# Публикация HoldUp 1.0.0 на AnkiWeb
 
-## One listing, one package
+Одна страница и один пакет содержат русский и английский интерфейсы.
+Язык выбирается по языку Anki. Для следующих обновлений используйте ту же
+страницу и тот же числовой код дополнения.
 
-Suggested title: **HoldUp — Extra practice alongside FSRS**
+## Готовые файлы и текст
 
-The [GitHub prerelease](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0-rc.3)
-is published with verified installers and the four-job validation report.
+- **Название:** `HoldUp — Extra practice alongside FSRS`
+- **Файл для загрузки:** [holdup-1.0.0.ankiaddon](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon).
+- **Описание:** [готовый HTML](ankiweb-description.html) · [открыть исходный текст для копирования](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/ankiweb-description.html).
+- **Скриншоты:** [четыре PNG](assets/README.md); три уже вставлены в HTML ссылками на изображения.
+- **Версии:** Anki 26.09 и 26.09.3, Windows и Linux. macOS пока не проверена.
+- **Поддержка и ошибки:** https://github.com/Asmoday7/holdup-anki-addon/issues
+- **Лицензия:** AGPL-3.0-or-later, аддон бесплатный и с открытым исходным кодом.
+- **Подтверждение проверок:** [validation](VALIDATION.md).
 
-English and Russian are included in the same add-on. HoldUp follows Anki's language.
-Use one listing and keep its existing add-on code for future updates.
+Архив `holdup-1.0.0.zip` содержит те же байты, что `.ankiaddon`. Используйте его
+как альтернативу, только если форма явно просит расширение ZIP. Папку `holdup/`
+вокруг файлов добавлять не нужно; архив уже собран в формате Anki.
 
-The ready-to-paste English HTML is [ankiweb-description.html](ankiweb-description.html).
-Four real desktop screenshots are in [assets](assets/README.md). The upload archive
-is `dist/holdup-1.0.0-rc.3.zip`; it is identical to the `.ankiaddon` installer.
+## Пошагово
 
-Compatibility targets: desktop Anki 26.09 and 26.09.3. Use the current
-[validation record](VALIDATION.md) for tested platforms. Do not advertise Windows
-11 manual validation until its report is available.
+1. Скачайте `.ankiaddon` из [стабильного релиза GitHub](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0).
+2. Войдите в свой аккаунт на AnkiWeb. Пароль не нужно передавать в чат.
+3. Откройте https://ankiweb.net/shared/addons и нажмите **Upload**.
+4. Укажите название выше и вставьте содержимое HTML-файла в описание.
+5. Выберите скачанный `.ankiaddon`. Укажите проверенный диапазон совместимости,
+   если форма предлагает такой выбор; дополнительные версии пока не заявляйте.
+6. Если есть поля для страницы поддержки или лицензии, используйте данные выше.
+   Изображения уже есть в HTML; при отдельном поле для скриншотов используйте PNG
+   из `release/assets/`.
+7. Проверьте предпросмотр, если он предлагается: заголовок, списки, изображения и
+   ссылки. Опубликуйте и сохраните адрес страницы и числовой код дополнения.
+8. Проверьте установку этим кодом: **Инструменты → Дополнения → Загрузить дополнения**,
+   вставьте код, перезапустите Anki и выполните короткий тест HoldUp → обычная
+   оценка → Undo, а затем дополнительный показ → Готово → Undo.
 
-## Owner's upload steps
+Если локальная GitHub-установка и установка по коду отображаются отдельными
+дополнениями, отключите старую локальную копию и перезапустите Anki: включённой
+должна остаться одна. Очередь хранится в коллекции и сохраняется; локальный
+интервал при необходимости выберите заново.
 
-1. Open AnkiWeb in a browser and sign in to the account that will own HoldUp.
-2. Open its add-on sharing/publishing form and create one HoldUp entry.
-3. Paste the title and HTML description, select the tested compatibility range
-   using the form's current controls, and upload the ZIP package. The HTML already
-   embeds screenshots from this repository; use the supplied PNGs if the form
-   offers a separate image upload instead.
-4. Keep **release candidate** visible if publishing this candidate for testing.
-   For stable 1.0.0, first close the open validation gates, build/tag that version
-   and update the description/version and upload archive accordingly.
-5. After submission, record the add-on's numeric code and listing URL here.
-   Test installation from that code in a separate Anki profile.
+## Добровольная поддержка
 
-The current form could not be inspected from the execution environment, and there
-is no authenticated AnkiWeb browser session here. Upload and acceptance are not
-claimed. The owner must perform these account-bound steps; no password is needed
-in this repository or chat.
+Тексты на русском и английском подготовлены в [SUPPORT_COPY.md](SUPPORT_COPY.md).
+Настоящая ссылка Boosty пока не предоставлена: в публичном HTML нет выдуманной
+ссылки или незаполненного шаблона. После добавления адреса достаточно одного
+небольшого блока внизу страницы. Все функции аддона остаются бесплатными.
 
-Published listing URL: **not yet submitted**
+## Что проверено в инструкции
 
-Add-on code: **not yet assigned**
+Официальное руководство подтверждает файл `.ankiaddon`, отсутствие внешней папки
+в архиве, запрет `__pycache__` и кнопку **Upload** на странице дополнений:
+[официальный исходник Anki, Sharing Add-ons](https://github.com/ankitects/anki/blob/main/docs-site/addons/sharing.mdx).
+Источник прочитан 30 октября 2026 года. Сам AnkiWeb из среды отвечает отказом
+доступа; авторизованной сессии здесь нет. Остальные поля формы описаны условно,
+их точные названия и принятие загрузки не проверялись.
+
+Страница AnkiWeb: **ещё не опубликована**.
+
+Код дополнения: **ещё не выдан**.

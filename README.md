@@ -5,12 +5,12 @@
 Not sure you will remember a card? **HoldUp** schedules another look at a time
 you choose, alongside your normal Anki reviews.
 
-**[Download 1.0.0-rc.3](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0-rc.3/holdup-1.0.0-rc.3.ankiaddon)**
+**[Download 1.0.0](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon)**
 
 [User guide](USER_GUIDE.md) · [Руководство пользователя](USER_GUIDE.ru.md)
 
-**Release candidate:** manual Windows 11 validation and a real study-day crossing
-are still open. [Release checklist](RELEASE_CHECKLIST.md) ·
+**Stable release 1.0.0.** The owner reported completing the manual checks after
+approximately a week of use on 30 October 2026. [Release checklist](RELEASE_CHECKLIST.md) ·
 [Validation record](release/VALIDATION.md) ·
 [GitHub checks](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
@@ -87,7 +87,7 @@ practice repeat or **Done** affects only the practice appointment.
 collection, including future ones. Cards and normal ratings remain.
 
 
-Version 1.0.0-rc.3 prepares the first stable release: faster large-queue clearing,
+Version 1.0.0 is the first stable release: faster large-queue clearing,
 AGPL-3.0-or-later licensing, reproducible packages and Windows/Linux CI. It retains
 independent appearances of the same card, their existing deadlines and native Undo/Redo.
 
@@ -125,7 +125,7 @@ because Anki uses a single-instance mechanism.
 ```bash
 python -m pytest --basetemp=.dev/pytest-full
 python tools/package_addon.py
-python tools/build_release.py --tag v1.0.0-rc.3
+python tools/build_release.py --tag v1.0.0
 ```
 
 The build is `.dev/dist/holdup.ankiaddon`. Published archives and checksums are in
@@ -134,13 +134,13 @@ AnkiWeb; pytest clears `--basetemp`. Skipped backend or GUI checks do not establ
 integration support.
 
 [Architecture](ARCHITECTURE.md) and [manual checks](TESTING.md) are maintained in Russian.
-Real Windows 11 scaling, audio and complex templates require manual validation;
+The owner completed the requested manual checks. Other Windows configurations, audio and complex templates can still vary;
 live cross-device sync remains outside the supported scope. AnkiDroid does not run desktop Python add-ons. Extra practice does not
 submit FSRS ratings, although it can affect what a person remembers on their next
 normal review.
 
-Automated validation: **231 passed in each of four jobs** — Windows/Python 3.13
+The release workflow runs **236 tests in each of four jobs** — Windows/Python 3.13
 and Linux/Python 3.12, with Anki **26.09** and **26.09.3**. Each job includes four
 English/Russian GUI scenarios with and without minute learning steps and clean
-native shutdown. See the [candidate report](release/validation-1.0.0-rc.3.json).
-Manual Windows 11 testing and a real study-day crossing are still pending.
+native shutdown. Publication requires all four jobs to pass. See the
+[validation record](release/VALIDATION.md) and attributed [manual report](release/manual-validation.json).

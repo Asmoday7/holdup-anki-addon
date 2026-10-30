@@ -1,4 +1,4 @@
-"""Summarize the four completed CI reports without claiming manual validation."""
+"""Record actual CI results and attribute manual release approval to its reporter."""
 
 import argparse
 from datetime import datetime, timezone
@@ -13,9 +13,26 @@ if __package__ in (None, ""):
 from tools.check_test_report import check
 
 
+def manual_validation(root: Path, version: str) -> dict | None:
+    if "-rc." in version:
+        return None
+    path = root / "release" / "manual-validation.json"
+    if not path.exists():
+        raise ValueError("Stable publication requires a recorded manual release approval")
+    report = json.loads(path.read_text(encoding="utf-8"))
+    if (report.get("release_approval") != version
+            or report.get("requested_checks") != "completed"
+            or report.get("basis") != "owner_report"
+            or not all(report.get(key) for key in
+                       ("reporter", "reported_on", "windows_manual", "study_day_boundary"))):
+        raise ValueError("Manual release approval is incomplete or belongs to another version")
+    return report
+
+
 def build(reports: Path, destination: Path) -> None:
     root = Path(__file__).resolve().parents[1]
     version = json.loads((root / "holdup" / "manifest.json").read_text(encoding="utf-8"))["human_version"]
+    manual = manual_validation(root, version)
     cases = []
     expected = {f"validation-{system}-anki-{anki}" for system in ("ubuntu-24.04", "windows-2025")
                 for anki in ("26.9", "26.9.3")}
@@ -28,7 +45,7 @@ def build(reports: Path, destination: Path) -> None:
         benchmark, = folder.rglob("queue-benchmark.json")
         measurements = json.loads(benchmark.read_text(encoding="utf-8"))
         if measurements.get("holdup") != version or measurements.get("undo_redo") != "passed":
-            raise ValueError("Queue benchmark does not match the candidate")
+            raise ValueError("Queue benchmark does not match the release")
         expected_platform = "Windows" if name.startswith("validation-windows") else "Linux"
         expected_python = "3.13." if expected_platform == "Windows" else "3.12."
         if (measurements.get("platform") != expected_platform
@@ -37,10 +54,13 @@ def build(reports: Path, destination: Path) -> None:
             raise ValueError("Reported platform/Anki/Python does not match the CI job")
         cases.append({"job": name, "passed": check(str(report)), "packaged_gui_cases": 4,
                       "queue_benchmark": measurements})
-    record = {"candidate": version,
+    record = {"version": version, "release_type": "candidate" if "-rc." in version else "stable",
               "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
               "recorded_utc": datetime.now(timezone.utc).isoformat(), "automated": cases,
-              "windows_11_manual": "not yet reported", "real_windows_study_day_crossing": "not yet reported"}
+              "windows_11_manual": manual["windows_manual"] if manual else "not yet reported",
+              "real_windows_study_day_crossing": manual["study_day_boundary"] if manual else "not yet reported"}
+    if manual:
+        record["manual_validation"] = manual
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8", newline="\n")
 

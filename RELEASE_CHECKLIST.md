@@ -1,6 +1,6 @@
 # HoldUp 1.0 release checklist
 
-Candidate: **1.0.0-rc.3**. This file records work and open gates; unchecked items
+Stable release: **1.0.0**. This file records work and open gates; unchecked items
 must not be reported as completed.
 
 ## 1. Validation
@@ -10,10 +10,10 @@ must not be reported as completed.
 - [x] A 2000-appearance regression checks repeat, clear, Undo/Redo and unchanged native history.
 - [x] A reproducible benchmark measures a temporary 1000-appearance queue.
 - [x] Windows/Python 3.13 and Linux/Python 3.12 CI jobs are defined for both Anki versions.
-- [x] Candidate's Linux matrix results recorded in [validation](release/VALIDATION.md).
-- [x] Candidate's Windows CI matrix completed successfully: 231 tests on each Anki version.
-- [ ] Actual Windows 11 test of the candidate completed by a tester.
-- [ ] A real Anki study-day boundary observed in the Windows test installation.
+- [x] Preceding rc.3 Linux matrix results recorded in [validation](release/VALIDATION.md).
+- [x] Preceding rc.3 Windows CI matrix completed successfully: 231 tests on each Anki version.
+- [x] Requested Windows manual checks completed according to the owner on 30 October 2026; see the [attributed report](release/manual-validation.json).
+- [x] Real next-study-day check accepted as part of the owner’s report that all requested checks were completed.
 
 ## 2. Data support
 
@@ -32,17 +32,18 @@ must not be reported as completed.
 ## 4. Publication
 
 - [x] Deterministic Windows/Linux packaging with checksums is implemented.
-- [x] Candidate release notes and English AnkiWeb description are prepared.
+- [x] Stable release notes and English AnkiWeb description are prepared.
 - [x] Four actual Anki screenshots captured and reviewed.
 - [x] Candidate archives and matching source tag pushed to GitHub.
 - [x] [GitHub prerelease](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0-rc.3) published after all four CI jobs pass.
-- [ ] Final manual Windows results received before stable 1.0.0.
-- [ ] Stable version/tag/archive prepared after the remaining validation gates pass.
+- [x] Owner’s final manual acceptance received and stable 1.0.0 requested.
+- [x] Stable version and archives prepared with explicit version-matched manual approval.
+- [ ] Stable 1.0.0 passed all four fresh CI jobs and was published on GitHub.
 - [ ] AnkiWeb listing uploaded through the owner's account.
 
 ## Short Windows test
 
-Install the candidate over the existing HoldUp and fully restart Anki. Use a
+For future regression checks, install the release over the existing HoldUp and fully restart Anki. Use a
 separate test profile with FSRS enabled, one card and learning steps `1m 10m`.
 
 1. On the answer, set HoldUp to two hours, press it, then choose normal Good.
@@ -59,6 +60,6 @@ separate test profile with FSRS enabled, one card and learning steps `1m 10m`.
 7. Separately, choose Next Anki study day and observe the real configured boundary.
    Do not change the system clock. Record whether the appearance becomes ready.
 
-Record Anki build, Python/Qt, Windows version, candidate version, date and results
+Record Anki build, Python/Qt, Windows version, HoldUp version, date and results
 in [validation](release/VALIDATION.md) or a GitHub issue. Linux/CI results do not
 substitute for this manual result.

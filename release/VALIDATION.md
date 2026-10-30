@@ -1,59 +1,60 @@
-# Candidate validation record
+# HoldUp 1.0.0 validation
 
-Candidate: **1.0.0-rc.3**. Automated reports use UTC; manual reports use the tester's local time zone.
+Stable release: **1.0.0**. Automated reports use UTC; the owner reported manual
+acceptance on **30 October 2026**.
 
-[Tagged CI run](https://github.com/Asmoday7/holdup-anki-addon/actions/runs/40094640748)
-completed successfully. The [published report](validation-1.0.0-rc.3.json) was downloaded
-unchanged from the GitHub prerelease and records the exact source commit and all four jobs.
+## Manual acceptance
 
-| Environment | Evidence | Status |
-| --- | --- | --- |
-| Linux / Anki 26.09 / Python 3.12 | Full candidate suite, four real packaged GUI scenarios | **231 passed**, four GUI cases |
-| Linux / Anki 26.09.3 / Python 3.12 | Full candidate suite, four real packaged GUI scenarios | **231 passed**, four GUI cases |
-| GitHub Windows runner / Python 3.13 / Anki 26.09 | Full tagged candidate suite and native application shutdown | **231 passed**, four GUI cases |
-| GitHub Windows runner / Python 3.13 / Anki 26.09.3 | Same matrix | **231 passed**, four GUI cases |
-| User's Windows 11 / Anki 26.09 | [Short manual test](../RELEASE_CHECKLIST.md#short-windows-test) | Not yet reported |
-| Actual next Anki study-day boundary on Windows | Real configured day-start crossing | Not yet reported |
-| macOS | No release evidence | Unverified |
-| Live multi-device HoldUp sync | No live test / conflict resolution | Outside supported scope |
+Asmoday7 reported: «я все проверил уже как неделю примерно» and requested the
+final stable release. This closes the requested Windows manual checks, including
+the real next-study-day check, on the basis of the owner's all-checks report.
 
-The previous 0.5.0 build passed 218 tests on each Linux Anki version. Those results
-are not substituted for the candidate or for Windows.
+The [original attributed report](manual-validation.json) is included in the stable
+release's machine-readable validation record. The exact installed candidate,
+Windows/Anki/Python/Qt versions and individual case logs were not restated.
+These results are attributed to the owner; they are not a new independent manual
+test by the assistant. Manual evidence does not automatically extend to macOS,
+other card templates or live multi-device sync.
 
-Local machine-readable results for the preceding rc.1 runtime (unchanged in rc.3):
-[local-validation.json](local-validation.json). The rc.3 tagged CI run tests its own
-versioned package separately.
+## Automated validation
 
-The desktop probe waits for Anki's complete native application cleanup and requires
-a clean subprocess exit. Its stale-queue rejection case externally buries the displayed
-card, guaranteeing a different native head without relying on random review sorting.
-Assertions, JavaScript error checks and the requirement for all four GUI cases remain enabled.
+The stable release workflow runs the full **236-test** suite in four environments:
 
-All four CI installers are byte-identical. The public prerelease installer, upload ZIP
-and checksums were downloaded and compared with the local release files.
+| Environment | Checks |
+| --- | --- |
+| Linux / Python 3.12 / Anki 26.09 | Full suite, four packaged desktop scenarios |
+| Linux / Python 3.12 / Anki 26.09.3 | Full suite, four packaged desktop scenarios |
+| Windows runner / Python 3.13 / Anki 26.09 | Full suite, four packaged desktop scenarios |
+| Windows runner / Python 3.13 / Anki 26.09.3 | Full suite, four packaged desktop scenarios |
+
+Publication requires all four jobs to pass without skips and their installers to
+be byte-identical. Stable publication also requires the recorded manual approval
+to match the release version. Missing, incomplete and wrong-version approvals have
+regression checks. The actual stable results are attached as `validation-1.0.0.json`
+to the [release](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0).
+
+The desktop probe waits for Anki's complete native cleanup and requires a clean
+subprocess exit. Its stale-queue case externally buries the displayed card to
+guarantee a different head. JavaScript errors and missing GUI cases remain failures.
 
 ## Storage and load
 
-Integration tests restore full exports in modern and legacy formats and a native
-Anki backup. A 2000-appearance regression checks selective repeat, clearing,
-Undo/Redo and unchanged native schedule/history. APKG tests demonstrate the
-documented lack of current collection appointments after deck import.
+Integration tests restore modern and legacy full exports and a native backup.
+A 2000-appearance regression covers selective Repeat, clearing, Undo/Redo and
+unchanged native schedule/history. APKG tests verify the documented lack of the
+current collection queue after a deck import.
 
-The initial synthetic 1000-item benchmark on Linux took 7.858 seconds to clear.
-After validating one snapshot instead of re-reading the entire config per item,
-the same benchmark took 0.014 seconds. These are observations from this environment,
-not timing guarantees for other computers. Candidate benchmark JSON reports are
-attached to CI validation artifacts and recorded locally for both Anki versions.
+The initial synthetic 1000-item benchmark on Linux took 7.858 seconds to clear;
+after the snapshot fix it took 0.014 seconds. These are observations, not timing
+guarantees. Each stable CI job records its own 1000-item benchmark.
 
-## Windows manual report
+## Earlier evidence
 
-- Tester/date/time zone: not reported
-- Windows / Anki / Python / Qt versions: not reported
-- Install/upgrade and restart persistence: not reported
-- Two independent appearances and counters: not reported
-- Native rating → Undo → original → regrade: not reported
-- Repeat/Done Undo/Redo, including finished overview: not reported
-- Real next-study-day crossing: not reported
-- Scaling / card audio and real templates: not reported
+The preceding rc.3 passed **231 tests in each of four Windows/Linux jobs**:
+[tagged run](https://github.com/Asmoday7/holdup-anki-addon/actions/runs/40094640748),
+[unaltered published report](validation-1.0.0-rc.3.json).
+[Local rc.1 results](local-validation.json) and [benchmarks](benchmarks) are retained
+as historical evidence. These reports are not relabelled as stable test runs.
 
-Do not change this section to passed without a tester's actual results.
+macOS remains unverified. Live multi-device sync/conflict resolution is outside
+the first release's support guarantee.
