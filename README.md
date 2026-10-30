@@ -145,9 +145,13 @@ English/Russian GUI scenarios with and without minute learning steps and clean
 native shutdown. Publication requires all four jobs to pass. See the
 [validation record](release/VALIDATION.md) and attributed [manual report](release/manual-validation.json).
 
-## Support
+## Support and future decks
 
-[Feed the developer on Boosty](https://boosty.to/asmoday7).
+[Boosty](https://boosty.to/asmoday7) · [DonatePay](https://donatepay.ru/don/1540741)
 
 If HoldUp helps you, you can buy me a snack. I like food. Thank you ❤️
 The add-on is completely free. Support is optional.
+
+I also plan to make Anki decks based on web novels, regardless of donations.
+You can leave a web novel title or an idea for a future deck in your DonatePay
+message. Your suggestions may help me choose which novel to work on next.
