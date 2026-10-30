@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "release_type": "stable",
+  "source_commit": "68a14a839ae42613eb2bc62b8e8ec343dc79c62d",
+  "recorded_utc": "2026-10-30T11:53:34.695334+00:00",
+  "automated": [
+    {
+      "job": "validation-ubuntu-24.04-anki-26.9",
+      "passed": 236,
+      "packaged_gui_cases": 4,
+      "queue_benchmark": {
+        "appearances": 1000,
+        "platform": "Linux",
+        "python": "3.12.15",
+        "anki_package": "26.9",
+        "holdup": "1.0.0",
+        "read_seconds": 0.005711891999993668,
+        "repeat_seconds": 0.010954128000008723,
+        "clear_seconds": 0.005989100999983066,
+        "undo_redo": "passed"
+      }
+    },
+    {
+      "job": "validation-ubuntu-24.04-anki-26.9.3",
+      "passed": 236,
+      "packaged_gui_cases": 4,
+      "queue_benchmark": {
+        "appearances": 1000,
+        "platform": "Linux",
+        "python": "3.12.15",
+        "anki_package": "26.9.3",
+        "holdup": "1.0.0",
+        "read_seconds": 0.009308716999981925,
+        "repeat_seconds": 0.018096826000004285,
+        "clear_seconds": 0.01009107699999845,
+        "undo_redo": "passed"
+      }
+    },
+    {
+      "job": "validation-windows-2025-anki-26.9",
+      "passed": 236,
+      "packaged_gui_cases": 4,
+      "queue_benchmark": {
+        "appearances": 1000,
+        "platform": "Windows",
+        "python": "3.13.16",
+        "anki_package": "26.9",
+        "holdup": "1.0.0",
+        "read_seconds": 0.009080000000039945,
+        "repeat_seconds": 0.016413100000022496,
+        "clear_seconds": 0.012625600000092163,
+        "undo_redo": "passed"
+      }
+    },
+    {
+      "job": "validation-windows-2025-anki-26.9.3",
+      "passed": 236,
+      "packaged_gui_cases": 4,
+      "queue_benchmark": {
+        "appearances": 1000,
+        "platform": "Windows",
+        "python": "3.13.16",
+        "anki_package": "26.9.3",
+        "holdup": "1.0.0",
+        "read_seconds": 0.014053400000022975,
+        "repeat_seconds": 0.02709989999999607,
+        "clear_seconds": 0.0160612000000242,
+        "undo_redo": "passed"
+      }
+    }
+  ],
+  "windows_11_manual": "completed according to the project owner's report",
+  "real_windows_study_day_crossing": "completed as part of the owner's report that all requested checks were completed",
+  "manual_validation": {
+    "release_approval": "1.0.0",
+    "basis": "owner_report",
+    "reporter": "Asmoday7",
+    "reported_on": "2026-10-30",
+    "reported_duration": "approximately one week",
+    "statement_original_ru": "\u044f \u0432\u0441\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u0438\u043b \u0443\u0436\u0435 \u043a\u0430\u043a \u043d\u0435\u0434\u0435\u043b\u044e \u043f\u0440\u0438\u043c\u0435\u0440\u043d\u043e",
+    "requested_checks": "completed",
+    "windows_manual": "completed according to the project owner's report",
+    "study_day_boundary": "completed as part of the owner's report that all requested checks were completed",
+    "environment_details": "Exact installed candidate, Windows/Anki/Python/Qt versions and individual test logs were not restated in this report.",
+    "scope": "Acceptance of the requested manual checks for the preceding release candidate and approval to publish stable 1.0.0. This is a user report, not a new independent manual test by the assistant."
+  }
+}

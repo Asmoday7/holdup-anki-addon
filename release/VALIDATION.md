@@ -18,7 +18,9 @@ other card templates or live multi-device sync.
 
 ## Automated validation
 
-The stable release workflow runs the full **236-test** suite in four environments:
+The [stable tagged run](https://github.com/Asmoday7/holdup-anki-addon/actions/runs/41050682638)
+completed successfully: **236 tests passed in each of four environments**.
+The [published report](validation-1.0.0.json) was downloaded unchanged from the release:
 
 | Environment | Checks |
 | --- | --- |
@@ -30,8 +32,9 @@ The stable release workflow runs the full **236-test** suite in four environment
 Publication requires all four jobs to pass without skips and their installers to
 be byte-identical. Stable publication also requires the recorded manual approval
 to match the release version. Missing, incomplete and wrong-version approvals have
-regression checks. The actual stable results are attached as `validation-1.0.0.json`
-to the [release](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0).
+regression checks. The public installer, alternate ZIP and checksums were downloaded and matched
+byte-for-byte with the local release files. GitHub marks
+[1.0.0](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0) as the latest stable release.
 
 The desktop probe waits for Anki's complete native cleanup and requires a clean
 subprocess exit. Its stale-queue case externally buries the displayed card to

@@ -4,6 +4,8 @@
 Язык выбирается по языку Anki. Для следующих обновлений используйте ту же
 страницу и тот же числовой код дополнения.
 
+GitHub: **[стабильный релиз 1.0.0 опубликован](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0)**.
+
 ## Готовые файлы и текст
 
 - **Название:** `HoldUp — Extra practice alongside FSRS`

@@ -38,7 +38,7 @@ must not be reported as completed.
 - [x] [GitHub prerelease](https://github.com/Asmoday7/holdup-anki-addon/releases/tag/v1.0.0-rc.3) published after all four CI jobs pass.
 - [x] Owner’s final manual acceptance received and stable 1.0.0 requested.
 - [x] Stable version and archives prepared with explicit version-matched manual approval.
-- [ ] Stable 1.0.0 passed all four fresh CI jobs and was published on GitHub.
+- [x] Stable 1.0.0 passed all four fresh CI jobs (236 tests each), was published as Latest and its public files matched local checksums.
 - [ ] AnkiWeb listing uploaded through the owner's account.
 
 ## Short Windows test
