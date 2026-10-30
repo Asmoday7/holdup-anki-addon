@@ -144,3 +144,10 @@ and Linux/Python 3.12, with Anki **26.09** and **26.09.3**. Each job includes fo
 English/Russian GUI scenarios with and without minute learning steps and clean
 native shutdown. Publication requires all four jobs to pass. See the
 [validation record](release/VALIDATION.md) and attributed [manual report](release/manual-validation.json).
+
+## Support
+
+[Feed the developer on Boosty](https://boosty.to/asmoday7).
+
+If HoldUp helps you, you can buy me a snack. I like food. Thank you ❤️
+The add-on is completely free. Support is optional.
