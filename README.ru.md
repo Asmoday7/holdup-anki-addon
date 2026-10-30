@@ -10,7 +10,7 @@
 [Инструкция пользователя](USER_GUIDE.ru.md) · [User guide](USER_GUIDE.md)
 
 **Стабильная версия 1.0.0.** 30 октября 2026 года владелец подтвердил завершение
-запрошенных ручных проверок после примерно недели использования. [Чеклист выпуска](RELEASE_CHECKLIST.md) ·
+запрошенных ручных проверок после примерно недели использования.
 [Результаты проверок](release/VALIDATION.md) ·
 [Проверки GitHub](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
@@ -102,7 +102,7 @@ Anki и HoldUp. Синий и красный счётчики берутся и�
 HoldUp распространяется под [AGPL-3.0-or-later](LICENSE). Установочный архив содержит
 исходники runtime, полный текст лицензии и [сведения о проекте](NOTICE).
 
-[Описание выпуска](release/RELEASE_NOTES.md) · [Материалы для AnkiWeb](release/ANKIWEB.md) ·
+[Описание выпуска](release/RELEASE_NOTES.md) ·
 [Выпуски GitHub](https://github.com/Asmoday7/holdup-anki-addon/releases).
 
 ## Разработка

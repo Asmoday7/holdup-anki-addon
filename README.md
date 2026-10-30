@@ -10,7 +10,7 @@ you choose, alongside your normal Anki reviews.
 [User guide](USER_GUIDE.md) · [Руководство пользователя](USER_GUIDE.ru.md)
 
 **Stable release 1.0.0.** The owner reported completing the manual checks after
-approximately a week of use on 30 October 2026. [Release checklist](RELEASE_CHECKLIST.md) ·
+approximately a week of use on 30 October 2026.
 [Validation record](release/VALIDATION.md) ·
 [GitHub checks](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
@@ -101,7 +101,7 @@ unverified. See the [data contract](release/DATA_AND_COMPATIBILITY.md).
 HoldUp is free software under [AGPL-3.0-or-later](LICENSE). The installer includes
 the runtime source, full license and [project notice](NOTICE).
 
-[Release notes](release/RELEASE_NOTES.md) · [AnkiWeb submission kit](release/ANKIWEB.md) ·
+[Release notes](release/RELEASE_NOTES.md) ·
 [GitHub releases](https://github.com/Asmoday7/holdup-anki-addon/releases).
 
 ## Development
