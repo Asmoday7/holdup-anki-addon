@@ -1,11 +1,23 @@
-# HoldUp — Send a card to both FSRS and a separate queue!
+# HoldUp — Build your own extra review queue in one click
 
 **English** · [Русский](README.ru.md)
 
 I've found HoldUp indispensable in my own Anki routine. If you enjoy simple, minimalist tools, I think you might really like it too.
 
-Not sure you will remember a card? **HoldUp** schedules another look at a time
-you choose, alongside your normal Anki reviews.
+You know the kanji and its meaning. A normal review in two days is fine — but
+you still want another look tonight, maybe to check one of its components.
+
+That's what I made **HoldUp** for. Choose your interval once, then press HoldUp
+while reviewing to add an extra appearance to its own queue. Rate the original
+as usual and carry on. Ready appearances join the green review count and show
+up when you study that deck.
+
+You can put together something similar with flags or filtered decks. I wanted to
+build that parallel queue on the fly, without stopping to organise it manually.
+
+Pressing HoldUp doesn't answer or reschedule the original; your normal rating
+still does that. Extra practice doesn't submit FSRS ratings, so FSRS doesn't
+know about those extra looks. They can still affect later recall.
 
 **[Download 1.0.0](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon)**
 

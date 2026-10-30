@@ -2,9 +2,10 @@
 
 **English** · [Русский](USER_GUIDE.ru.md)
 
-Not sure you will remember a card? HoldUp schedules extra practice at a time you
-choose, alongside your normal Anki reviews. For example, Anki may schedule a word
-for eight days from now while you would like to see it again tomorrow.
+You know the kanji and its meaning. A normal review in two days is fine, but you
+want another look tonight, perhaps to check one of its components. Choose your
+interval once, then press **HoldUp** while reviewing to add an extra appearance
+to its own queue. Rate the original as usual and keep going.
 
 ## Install
 
@@ -64,6 +65,10 @@ After showing the answer, choose:
 
 These actions do not record FSRS ratings. The original continues through Anki's
 normal schedule. Seeing the same word through both schedules within the same study day is expected.
+
+FSRS doesn't know about those extra looks. Even though they don't submit ratings
+or reschedule the original, they can still affect what you remember at your next
+normal review.
 
 ## See what is waiting
 

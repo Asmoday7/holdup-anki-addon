@@ -1,11 +1,15 @@
-<p><b>A note from the author:</b> I've found HoldUp indispensable in my own Anki routine. If you enjoy simple, minimalist tools, I think you might really like it too.</p>
-<p><b>HoldUp — Extra practice alongside FSRS</b></p>
-<p><b>HoldUp adds a new button to Anki for extra practice at custom intervals, alongside your normal Anki/FSRS reviews.</b></p>
+<p>I've found HoldUp indispensable in my own Anki routine. If you like simple, minimalist tools, you might like it too.</p>
+<p><b>HoldUp — Build your own extra review queue in one click</b></p>
+<p><b>HoldUp builds a parallel review queue on the fly, separate from your normal Anki/FSRS schedule.</b></p>
 <p><b>Version 1.0.0 — free and open source.</b></p>
 <p><img src="https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-08-ready-badge.png" alt="A deck row with a green HoldUp badge showing one extra appearance ready to study" width="850" style="max-width:100%;height:auto;"></p>
-<p>A small addition to your deck list: the green clock badge shows when HoldUp practice is ready. Open the deck as usual to study it.</p>
-<p>Want another look at a card before Anki brings it back? HoldUp schedules an
-extra appearance at a time you choose, alongside your normal Anki reviews.</p>
+<p>The little green badge means there's HoldUp practice ready in that deck. Open the deck as usual to study it.</p>
+<p>Under the hood, it's dead simple: set your interval once, then hit <b>HoldUp</b> to add an extra appearance of the card to your own queue. Rate the original normally — <b>Again, Hard, Good or Easy</b> — letting Anki/FSRS schedule its usual interval, say, two days. Adding a HoldUp appearance doesn't answer or reschedule the original.</p>
+<p>Wanting a quick re-check tonight doesn't mean I'm unhappy with the algorithm. For example, I might remember a kanji perfectly fine and be totally okay with a two-day gap, but still have this random urge to double-check one of its components or radicals tonight, just to be safe…</p>
+<p>This add-on lets you scratch that itch right away. With your interval already set, queue up that extra review in one click, keep your flow, and move on. When it's ready, it joins the green review count and shows up when you study that deck.</p>
+<p>Sure, you could put together something similar with flags or filtered decks. For me, that setup gets in the way. I wanted to build that parallel queue directly during reviews without stopping to organise it manually.</p>
+<p><b>It's not meant to improve FSRS predictions… it's just a fast shortcut for optional extra practice.</b></p>
+<p>Extra practice doesn't submit FSRS ratings, so FSRS doesn't know about those extra looks. They can still affect what you remember at your next normal review.</p>
 <p><b>How it works, step by step</b></p>
 <p>These screenshots show Japanese sentence cards. HoldUp can also be used with other subjects.</p>
 <p><b>1. Choose when you want another look</b><br>Use the <b>…</b> menu to choose 1 second to 24 hours, or <b>Next Anki study day</b> using Anki's day-start setting. This setting applies to subsequent HoldUp presses. The screenshots use a short interval to demonstrate the flow.</p>
@@ -23,9 +27,7 @@ extra appearance at a time you choose, alongside your normal Anki reviews.</p>
 <p><b>7. Repeat or finish this extra appearance</b><br><b>Again in…</b> reschedules only this appearance; <b>Done</b> finishes it. These actions do not submit a normal FSRS rating.</p>
 <p><img src="https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-04-practice-answer.png" alt="Extra practice answer with Again in 1s, Done and interval controls" width="850" style="max-width:100%;height:auto;"></p>
 <p><b>A few more details</b></p>
-<p>HoldUp does not choose a normal rating for you. The original keeps its normal
-Anki schedule, FSRS history and daily new-card accounting. Extra practice does not
-submit an FSRS rating, although it can affect what you remember on your next normal review.</p>
+<p>Your normal Anki rating handles the original card's schedule, FSRS history and daily new-card accounting.</p>
 <ul>
   <li>Each new HoldUp press adds a separate extra appearance; older appointments keep their times.</li>
   <li>Use normal <b>Undo/Redo</b> for appointments, repeats and completion.</li>
