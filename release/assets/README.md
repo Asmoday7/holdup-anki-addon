@@ -7,6 +7,10 @@ content, counters and controls.
 
 Eight of the eleven supplied frames illustrate the stages used in the listing:
 
+The listing opens with the compact `example-08-ready-badge.png` deck-row preview,
+then follows the workflow: interval, original answer, scheduled appearance,
+deck list, deck overview, practice question and practice answer.
+
 | File | State |
 | --- | --- |
 | `example-01-normal-review.png` | Normal answer with the four Anki ratings and HoldUp. |

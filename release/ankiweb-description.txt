@@ -5,25 +5,49 @@ Version 1.0.0 — free and open source
 
 HoldUp adds a new button to Anki for extra practice at custom intervals, alongside your normal Anki/FSRS reviews.
 
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-08-ready-badge.png
+A small addition to your deck list: the green clock badge shows when HoldUp practice is ready. Open the deck as usual to study it.
+
 Want another look at a card before Anki brings it back? HoldUp schedules an extra appearance at a time you choose, alongside your normal Anki reviews.
 
-HOW TO USE
+HOW IT WORKS, STEP BY STEP
 
-1. Show the answer and press HoldUp.
-2. Give the original your normal Again, Hard, Good or Easy rating.
-3. The extra appearance becomes ready at your chosen time and joins the same reviewer.
+These screenshots show Japanese sentence cards. HoldUp can also be used with other subjects.
 
-After pressing HoldUp, a checkmark and the waiting count confirm that extra practice is scheduled. The original stays open: choose a normal Anki rating to finish grading it.
+1. Choose when you want another look
+Use the … menu to choose 1 second to 24 hours, or Next Anki study day using Anki's day-start setting. This setting applies to subsequent HoldUp presses. The screenshots use a short interval to demonstrate the flow.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-05-interval.png
+
+2. Show the answer and press HoldUp
+Schedule an extra appearance of the card at your chosen interval.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-01-normal-review.png
+
+3. Choose your normal Anki rating
+The checkmark and increased waiting count confirm that extra practice is scheduled. The original stays open: choose Again, Hard, Good or Easy to finish grading it as usual.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-02-holdup-scheduled.png
+
+4. See when extra practice is ready
+When its time arrives, a green clock badge appears next to the deck name on the Decks screen. It counts ready HoldUp appearances; the native Anki counts remain visible alongside it.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-07-deck-list.png
+
+5. Open the deck and continue studying
+The deck overview shows both waiting and ready appearances, with ready practice included in the green review count. Continue studying returns to the same reviewer.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-06-deck-overview.png
+
+6. The card returns for extra practice
+Ready appearances join the same reviewer. The HoldUp label identifies practice without an FSRS rating. Press Show Answer as usual.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-03-practice-question.png
+
+7. Repeat or finish this extra appearance
+Again in… reschedules only this appearance; Done finishes it. These actions do not submit a normal FSRS rating.
+https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-04-practice-answer.png
+
+A FEW MORE DETAILS
 
 HoldUp does not choose a normal rating for you. The original keeps its normal Anki schedule, FSRS history and daily new-card accounting. Extra practice does not submit an FSRS rating, although it can affect what you remember on your next normal review.
 
-FEATURES
-
-- Choose 1 second to 24 hours, or Next Anki study day using Anki's day-start setting.
 - Each new HoldUp press adds a separate extra appearance; older appointments keep their times.
-- Again in… reschedules the appearance on screen; Done finishes only that appearance.
 - Use normal Undo/Redo for appointments, repeats and completion.
-- See ready appearances in the green review count and a clock badge on the deck list.
 - English and Russian are included in one package and follow Anki's language.
 
 COMPATIBILITY
@@ -37,24 +61,6 @@ https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.md
 
 РУССКАЯ ИНСТРУКЦИЯ
 https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.ru.md
-
-SCREENSHOTS
-1. The original card: normal Anki ratings and HoldUp
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-01-normal-review.png
-2. HoldUp pressed: now choose a normal Anki rating
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-02-holdup-scheduled.png
-3. Extra practice in the same reviewer
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-03-practice-question.png
-4. Repeat or finish this extra appearance
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-04-practice-answer.png
-5. Choose an interval or the next Anki study day
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-05-interval.png
-6. See what is waiting and what is ready
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-06-deck-overview.png
-7. Find ready practice on the Decks screen
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-07-deck-list.png
-A closer look at the ready badge
-https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-08-ready-badge.png
 
 VALIDATION
 https://github.com/Asmoday7/holdup-anki-addon/blob/main/release/VALIDATION.md
