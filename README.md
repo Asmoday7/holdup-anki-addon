@@ -2,6 +2,8 @@
 
 **English** · [Русский](README.ru.md)
 
+I've found HoldUp indispensable in my own Anki routine. If you enjoy simple, minimalist tools, I think you might really like it too.
+
 Not sure you will remember a card? **HoldUp** schedules another look at a time
 you choose, alongside your normal Anki reviews.
 
@@ -44,7 +46,11 @@ their deadlines; the waiting count includes every appearance, even of the same c
 No card or note is duplicated. Scheduling practice alone does not answer
 Good or consume the daily new-card allowance; the normal rating does.
 
-![HoldUp alongside Anki's normal answer buttons](release/assets/01-normal-review.png)
+![HoldUp alongside Anki's normal answer buttons](release/assets/example-01-normal-review.png)
+
+After pressing HoldUp, the checkmark confirms the extra appearance. The original stays open so you can choose a normal Anki rating.
+
+![HoldUp checked while the normal Anki rating buttons remain available](release/assets/example-02-holdup-scheduled.png)
 
 ## Language and time
 
@@ -72,6 +78,8 @@ On **Decks**, a small green clock badge **HoldUp · N** shows ready practice,
 even when the three native deck counts are zero. Open the deck by its normal name.
 Parents include their subdecks, including collapsed ones; parent and child counts
 overlap. Future and unavailable appointments do not show ready badges.
+
+![Ready HoldUp appearances shown beside the deck names](release/assets/example-07-deck-list.png)
 
 Practice uses the selected deck and subdecks. A deadline is the earliest time it
 can appear: the current answer and earlier native deadlines can delay it. When
