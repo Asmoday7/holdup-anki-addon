@@ -129,8 +129,10 @@ jobs:
           if [[ "$GITHUB_REF_NAME" == *-rc.* ]]; then
             release_flags=(--prerelease)
           fi
+          release_version="${GITHUB_REF_NAME#v}"
           gh release create "$GITHUB_REF_NAME" \
             --verify-tag "${release_flags[@]}" \
             --title "HoldUp ${GITHUB_REF_NAME#v}" \
             --notes-file release/RELEASE_NOTES.md \
-            dist/holdup-*.ankiaddon dist/holdup-*.zip dist/SHA256SUMS dist/validation-*.json
+            "dist/holdup-${release_version}.ankiaddon" "dist/holdup-${release_version}.zip" \
+            dist/SHA256SUMS "dist/validation-${release_version}.json"

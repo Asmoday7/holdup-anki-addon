@@ -1,7 +1,11 @@
 I've found HoldUp indispensable in my own Anki routine. If you like simple, minimalist tools, you might like it too.
 
 HoldUp — Build your own extra review queue in one click
-Version 1.0.0 — free and open source
+Version 1.0.1 — free and open source
+
+WHAT'S NEW IN 1.0.1
+
+Compatibility fixes for Advanced Review Bottombar (https://ankiweb.net/shared/info/1136455830). HoldUp's waiting count and interval labels no longer overlap. Custom and hidden rating buttons, extra-practice sessions and the Continue studying action now work together with the custom bottom bar. Existing cards and extra-practice appointments are preserved.
 
 HoldUp builds a parallel review queue on the fly, separate from your normal Anki/FSRS schedule.
 
@@ -63,7 +67,8 @@ Your normal Anki rating handles the original card's schedule, FSRS history and d
 COMPATIBILITY
 
 Desktop Anki 26.09 and 26.09.3 on Windows and Linux. macOS has not been verified.
-First-release support is one desktop installation per collection. Full collection exports and Anki backups preserve the extra queue; deck .apkg export does not transfer the complete queue. Live multi-device sync/conflict resolution is unverified.
+Also tested with Advanced Review Bottombar 3.6.1 in English and Russian, with different button settings and both add-on load orders.
+Supported use is one desktop installation per collection. Full collection exports and Anki backups preserve the extra queue; deck .apkg export does not transfer the complete queue. Live multi-device sync/conflict resolution is unverified.
 AnkiDroid and AnkiMobile do not run desktop Python add-ons.
 
 USER GUIDE

@@ -1,13 +1,14 @@
 {
-  "release_approval": "1.0.0",
+  "release_approval": "1.0.1",
   "basis": "owner_report",
   "reporter": "Asmoday7",
-  "reported_on": "2026-10-30",
-  "reported_duration": "approximately one week",
-  "statement_original_ru": "я все проверил уже как неделю примерно",
+  "reported_on": "2026-11-04",
+  "report_timezone": "Asia/Vladivostok",
+  "accepted_candidate": "1.0.1-rc.2",
+  "statement_original_ru": "такс, окей, все робит...",
   "requested_checks": "completed",
-  "windows_manual": "completed according to the project owner's report",
-  "study_day_boundary": "completed as part of the owner's report that all requested checks were completed",
-  "environment_details": "Exact installed candidate, Windows/Anki/Python/Qt versions and individual test logs were not restated in this report.",
-  "scope": "Acceptance of the requested manual checks for the preceding release candidate and approval to publish stable 1.0.0. This is a user report, not a new independent manual test by the assistant."
+  "windows_manual": "Owner reports the fixed candidate works in their existing installation after the Advanced Review Bottombar layout repair. Exact environment versions were not restated.",
+  "study_day_boundary": "Not newly reported for this compatibility patch. The prior study-day acceptance is preserved in manual-validation-1.0.0.json; stable 1.0.1 changes only version metadata relative to the tested 1.0.1-rc.2 candidate and introduces no scheduling changes.",
+  "environment_details": "The report follows installation of the linked 1.0.1-rc.2 candidate; individual manual test cases and Windows/Anki/Python/Qt versions were not restated.",
+  "scope": "Owner acceptance of the fixed candidate for the 1.0.1 compatibility update and request to update the AnkiWeb listing. This records the owner report, not a new independent manual test by the assistant."
 }

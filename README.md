@@ -19,16 +19,16 @@ Pressing HoldUp doesn't answer or reschedule the original; your normal rating
 still does that. Extra practice doesn't submit FSRS ratings, so FSRS doesn't
 know about those extra looks. They can still affect later recall.
 
-**[Download 1.0.0](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon)**
+**[Download 1.0.1](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.1/holdup-1.0.1.ankiaddon)**
 
 [User guide](USER_GUIDE.md) · [Руководство пользователя](USER_GUIDE.ru.md)
 
-**Stable release 1.0.0.** The owner reported completing the manual checks after
-approximately a week of use on 30 October 2026.
+**Stable release 1.0.1.** The owner confirmed the Advanced Review Bottombar fix
+works on 4 November 2026 (Asia/Vladivostok).
 [Validation record](release/VALIDATION.md) ·
 [GitHub checks](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
-Using Advanced Review Bottombar? The **[1.0.1-rc.2 compatibility candidate](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.2.ankiaddon)**
+Using Advanced Review Bottombar? **1.0.1**
 fixes overlapping status/interval labels, hidden rating buttons, custom question
 layouts, practice-only startup and the Continue studying action.
 See the [compatibility checks](release/BOTTOMBAR_COMPATIBILITY.md).
@@ -150,7 +150,7 @@ because Anki uses a single-instance mechanism.
 ```bash
 python -m pytest --basetemp=.dev/pytest-full
 python tools/package_addon.py
-python tools/build_release.py --tag v1.0.0
+python tools/build_release.py --tag v1.0.1
 ```
 
 The build is `.dev/dist/holdup.ankiaddon`. Published archives and checksums are in

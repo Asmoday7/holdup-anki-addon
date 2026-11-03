@@ -21,16 +21,16 @@
 как повторы FSRS, поэтому алгоритм о них не знает. При этом они могут повлиять
 на то, что вы вспомните при следующем обычном повторении.
 
-**[Скачать 1.0.0](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon)**
+**[Скачать 1.0.1](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.1/holdup-1.0.1.ankiaddon)**
 
 [Инструкция пользователя](USER_GUIDE.ru.md) · [User guide](USER_GUIDE.md)
 
-**Стабильная версия 1.0.0.** 30 октября 2026 года владелец подтвердил завершение
-запрошенных ручных проверок после примерно недели использования.
+**Стабильная версия 1.0.1.** 4 ноября 2026 года (Asia/Vladivostok) владелец
+подтвердил работоспособность исправления для Advanced Review Bottombar.
 [Результаты проверок](release/VALIDATION.md) ·
 [Проверки GitHub](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
-Для Advanced Review Bottombar подготовлен **[кандидат 1.0.1-rc.2](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.2.ankiaddon)**:
+В **1.0.1** для Advanced Review Bottombar
 исправлены наложение счётчика на интервалы, скрытые кнопки оценок, нестандартная
 разметка вопроса, запуск отдельной практики и кнопка «Продолжить изучение».
 Подробнее — [проверки совместимости](release/BOTTOMBAR_COMPATIBILITY.md).
@@ -153,7 +153,7 @@ python -m pytest -m "not anki_contract and not anki_gui" --basetemp=.dev/pytest-
 ```bash
 python -m pytest --basetemp=.dev/pytest-full
 python tools/package_addon.py
-python tools/build_release.py --tag v1.0.0
+python tools/build_release.py --tag v1.0.1
 ```
 
 Сборка — `.dev/dist/holdup.ankiaddon`. Архивы и контрольные суммы — в [dist](dist/README.md).

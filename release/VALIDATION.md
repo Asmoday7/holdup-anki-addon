@@ -1,4 +1,31 @@
-# HoldUp 1.0.0 validation
+# HoldUp validation
+
+## HoldUp 1.0.1
+
+Stable 1.0.1 promotes the owner-confirmed 1.0.1-rc.2 compatibility fixes. Runtime
+code is identical to that candidate; only the manifest version changes.
+
+The owner reported that the fixed candidate works on **4 November 2026
+(Asia/Vladivostok)** and requested the AnkiWeb update. See the
+[attributed acceptance](manual-validation.json). Exact environment versions and
+individual manual cases were not restated. A fresh study-day-boundary test was
+not reported for this compatibility patch; the earlier report remains below.
+
+The preceding candidate passed **253 tests in each of four Windows/Linux jobs**:
+[candidate checks](https://github.com/Asmoday7/holdup-anki-addon/actions/runs/41660981133).
+The stable tag runs the full matrix again and publishes only after all four
+jobs pass, with no skipped integration checks and byte-identical packages.
+[Stable tag checks](https://github.com/Asmoday7/holdup-anki-addon/actions?query=branch%3Av1.0.1)
+provide the current publication status. The published release includes
+`validation-1.0.1.json` with the actual stable-tag test counts and benchmarks.
+
+The compatibility scenarios use real Advanced Review Bottombar source in both
+load orders and English/Russian. They check visible waiting/ready labels,
+intervals, native ratings, original Undo, Repeat/Done Undo, practice-only startup
+and unchanged native review logs during extra practice. See
+[compatibility details](BOTTOMBAR_COMPATIBILITY.md).
+
+## HoldUp 1.0.0 validation
 
 Stable release: **1.0.0**. Automated reports use UTC; the owner reported manual
 acceptance on **30 October 2026**.
@@ -9,7 +36,7 @@ Asmoday7 reported: «я все проверил уже как неделю пр�
 final stable release. This closes the requested Windows manual checks, including
 the real next-study-day check, on the basis of the owner's all-checks report.
 
-The [original attributed report](manual-validation.json) is included in the stable
+The [original attributed report](manual-validation-1.0.0.json) is included in the stable
 release's machine-readable validation record. The exact installed candidate,
 Windows/Anki/Python/Qt versions and individual case logs were not restated.
 These results are attributed to the owner; they are not a new independent manual

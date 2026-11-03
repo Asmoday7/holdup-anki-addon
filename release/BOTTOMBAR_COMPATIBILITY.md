@@ -1,6 +1,6 @@
 # Advanced Review Bottombar compatibility
 
-HoldUp 1.0.1-rc.2 addresses interaction with
+HoldUp 1.0.1 addresses interaction with
 [Advanced Review Bottombar](https://ankiweb.net/shared/info/1136455830).
 Initial feedback did not include reproduction steps. Later screenshots exposed
 the waiting-status/interval overlap missed by the first candidate. The problems
@@ -62,4 +62,6 @@ twelve compatibility scenarios without skips.
 CI runs these checks alongside the existing backend and four standalone desktop
 scenarios on Windows/Python 3.13 and Linux/Python 3.12 with Anki 26.09 and 26.09.3.
 Job results remain the evidence for which combinations actually passed.
-Real-user confirmation of this candidate has not yet been reported.
+The owner confirmed the fixed 1.0.1-rc.2 candidate works on 4 November 2026
+(Asia/Vladivostok). Stable 1.0.1 contains the same runtime code, with updated
+version metadata. See the [attributed report](manual-validation.json).

@@ -1,7 +1,8 @@
 <p>I've found HoldUp indispensable in my own Anki routine. If you like simple, minimalist tools, you might like it too.</p>
 <p><b>HoldUp — Build your own extra review queue in one click</b></p>
 <p><b>HoldUp builds a parallel review queue on the fly, separate from your normal Anki/FSRS schedule.</b></p>
-<p><b>Version 1.0.0 — free and open source.</b></p>
+<p><b>Version 1.0.1 — free and open source.</b></p>
+<p><b>What's new in 1.0.1:</b> compatibility fixes for <a href="https://ankiweb.net/shared/info/1136455830">Advanced Review Bottombar</a>. HoldUp's waiting count and interval labels no longer overlap. Custom and hidden rating buttons, extra-practice sessions and the <b>Continue studying</b> action now work together with the custom bottom bar. Existing cards and extra-practice appointments are preserved.</p>
 <p><img src="https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/release/assets/example-08-ready-badge.png" alt="A deck row with a green HoldUp badge showing one extra appearance ready to study" width="850" style="max-width:100%;height:auto;"></p>
 <p>The little green badge means there's HoldUp practice ready in that deck. Open the deck as usual to study it.</p>
 <p>Under the hood, it's dead simple: set your interval once, then hit <b>HoldUp</b> to add an extra appearance of the card to your own queue. Rate the original normally — <b>Again, Hard, Good or Easy</b> — letting Anki/FSRS schedule its usual interval, say, two days. Adding a HoldUp appearance doesn't answer or reschedule the original.</p>
@@ -34,8 +35,9 @@
   <li>English and Russian are included in one package and follow Anki's language.</li>
 </ul>
 <p><b>Tested compatibility:</b> desktop Anki 26.09 and 26.09.3 on Windows and Linux.
+Also tested with Advanced Review Bottombar 3.6.1 in English and Russian, with different button settings and both add-on load orders.
 macOS has not been verified.
-First-release support is one desktop installation per collection. Full collection
+Supported use is one desktop installation per collection. Full collection
 exports and Anki backups preserve the extra queue; deck .apkg export does not
 transfer the complete queue. Live multi-device sync/conflict resolution is unverified.
 AnkiDroid and AnkiMobile do not run desktop Python add-ons.</p>

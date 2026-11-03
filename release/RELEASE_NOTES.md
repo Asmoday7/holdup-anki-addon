@@ -1,13 +1,15 @@
-# HoldUp 1.0.1-rc.2
+# HoldUp 1.0.1
 
-Compatibility candidate for Advanced Review Bottombar (AnkiWeb 1136455830).
+Compatibility update for Advanced Review Bottombar (AnkiWeb 1136455830).
+Promotes the owner-confirmed 1.0.1-rc.2 fixes to a stable release. The runtime
+code is unchanged from that candidate; only the version metadata changes.
 
 - Fix the overlap between the HoldUp waiting status and interval captions above
   Again/Hard/Good/Easy. Captions outside the buttons now occupy their own line.
 - Add a regression check for actual text intersections after scheduling HoldUp,
   in English/Russian with waiting/ready appointments and different window/font sizes.
 
-Includes the earlier compatibility fixes:
+Also includes these compatibility fixes:
 
 - HoldUp stays available when Good, Hard or Easy buttons are hidden.
 - Question counts work with renamed/restyled Show Answer buttons and are not duplicated.
@@ -21,9 +23,10 @@ hidden-button and wide-button configurations in both load orders and English/Rus
 normal ratings, original Undo, Repeat/Done Undo and unchanged native review logs
 through extra practice. See [compatibility evidence](BOTTOMBAR_COMPATIBILITY.md).
 
-Install `holdup-1.0.1-rc.2.ankiaddon` through **Tools → Add-ons → Install from file**
+Install `holdup-1.0.1.ankiaddon` through **Tools → Add-ons → Install from file**
 and restart Anki. Keep one HoldUp copy enabled. Existing cards and extra-practice
 appointments are preserved; the queue data format is unchanged.
 
-This is a candidate for the compatibility fix. Stable 1.0.0 remains available.
-Real-device confirmation for this candidate has not yet been reported.
+The owner confirmed that the fixed candidate works in their installation on
+4 November 2026 (Asia/Vladivostok). Automated release checks cover Windows and
+Linux with Anki 26.09 and 26.09.3; macOS remains unverified.

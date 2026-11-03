@@ -1,0 +1,13 @@
+{
+  "release_approval": "1.0.0",
+  "basis": "owner_report",
+  "reporter": "Asmoday7",
+  "reported_on": "2026-10-30",
+  "reported_duration": "approximately one week",
+  "statement_original_ru": "я все проверил уже как неделю примерно",
+  "requested_checks": "completed",
+  "windows_manual": "completed according to the project owner's report",
+  "study_day_boundary": "completed as part of the owner's report that all requested checks were completed",
+  "environment_details": "Exact installed candidate, Windows/Anki/Python/Qt versions and individual test logs were not restated in this report.",
+  "scope": "Acceptance of the requested manual checks for the preceding release candidate and approval to publish stable 1.0.0. This is a user report, not a new independent manual test by the assistant."
+}
