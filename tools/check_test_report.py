@@ -17,10 +17,10 @@ def check(path: str) -> int:
         raise ValueError("All four packaged desktop scenarios must run")
     compatibility = [case for case in root.iter("testcase")
                      if case.attrib.get("name", "").startswith("test_advanced_review_bottombar[")]
-    if len(compatibility) != 6:
-        raise ValueError("All six Advanced Review Bottombar scenarios must run")
+    if len(compatibility) != 12:
+        raise ValueError("All twelve Advanced Review Bottombar scenarios must run")
     return count
 
 
 if __name__ == "__main__":
-    print(f"Release test report: {check(sys.argv[1])} passed, including four desktop and six compatibility scenarios")
+    print(f"Release test report: {check(sys.argv[1])} passed, including four desktop and twelve compatibility scenarios")

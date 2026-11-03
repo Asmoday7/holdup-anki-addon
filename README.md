@@ -28,9 +28,10 @@ approximately a week of use on 30 October 2026.
 [Validation record](release/VALIDATION.md) ·
 [GitHub checks](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
-Using Advanced Review Bottombar? The **[1.0.1-rc.1 compatibility candidate](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.1.ankiaddon)**
-fixes hidden rating buttons, custom question layouts, practice-only startup and
-the Continue studying action. See the [compatibility checks](release/BOTTOMBAR_COMPATIBILITY.md).
+Using Advanced Review Bottombar? The **[1.0.1-rc.2 compatibility candidate](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.2.ankiaddon)**
+fixes overlapping status/interval labels, hidden rating buttons, custom question
+layouts, practice-only startup and the Continue studying action.
+See the [compatibility checks](release/BOTTOMBAR_COMPATIBILITY.md).
 
 ## Install
 
@@ -163,10 +164,11 @@ live cross-device sync remains outside the supported scope. AnkiDroid does not r
 submit FSRS ratings, although it can affect what a person remembers on their next
 normal review.
 
-The release workflow runs **236 tests in each of four jobs** — Windows/Python 3.13
+The release workflow runs **253 tests in each of four jobs** — Windows/Python 3.13
 and Linux/Python 3.12, with Anki **26.09** and **26.09.3**. Each job includes four
 English/Russian GUI scenarios with and without minute learning steps and clean
-native shutdown. Publication requires all four jobs to pass. See the
+native shutdown, plus twelve checks with Advanced Review Bottombar in both
+languages and load orders. Publication requires all four jobs to pass. See the
 [validation record](release/VALIDATION.md) and attributed [manual report](release/manual-validation.json).
 
 ## Support and future decks

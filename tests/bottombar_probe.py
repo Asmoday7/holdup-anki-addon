@@ -8,26 +8,26 @@ import sys
 import time
 
 
-def main(base, archive, source, order, style):
+def main(base, archive, source, order, style, language):
     import anki.lang
     import aqt
     from aqt.profiles import ProfileManager, VideoDriver
     from aqt.qt import QEvent, QTimer
 
-    anki.lang.set_lang("en")
+    anki.lang.set_lang(language)
     base.mkdir(parents=True)
     pm = ProfileManager(base)
     pm.setupMeta()
     pm.create("Compatibility")
     pm.load("Compatibility")
-    pm.meta.update(firstRun=False, defaultLang="en")
+    pm.meta.update(firstRun=False, defaultLang=language)
     pm.profile["autoSync"] = False
     pm.set_update_check(False)
     pm.set_check_for_addon_updates(False)
     pm.set_video_driver(VideoDriver.Software)
     pm.save()
     pm.db.close()
-    app = aqt._run(["holdup-compatibility", "-b", str(base), "-p", "Compatibility", "-l", "en"], exec=False)
+    app = aqt._run(["holdup-compatibility", "-b", str(base), "-p", "Compatibility", "-l", language], exec=False)
     mw = aqt.mw
     assert app is not None and mw is not None
     alerts = []
@@ -70,6 +70,41 @@ def main(base, archive, source, order, style):
         return (card.due, card.queue, card.type, card.ivl, card.reps, card.lapses,
                 card.memory_state.SerializeToString() if card.memory_state else None,
                 [r.SerializeToString() for r in mw.col.get_review_logs(cid)])
+
+    def check_text_layout():
+        # Check painted text, including intervals outside the native buttons.
+        # Button bounds alone miss labels escaping upward into our status line.
+        expression = """(() => {
+            const blocks = [];
+            function add(node, label) {
+                if (!node || !node.getClientRects().length) return;
+                const range = document.createRange(); range.selectNodeContents(node);
+                for (const r of range.getClientRects()) {
+                    if (r.width > 0 && r.height > 0) blocks.push({label, text:node.textContent.trim(),
+                        left:r.left, right:r.right, top:r.top, bottom:r.bottom});
+                }
+            }
+            document.querySelectorAll('#holdup-queue-counts > span').forEach((n,i)=>add(n,'count '+i));
+            add(document.querySelector('#holdup-waiting'), 'waiting');
+            const first = document.querySelector('#middle button[data-ease]');
+            first?.closest('table').querySelectorAll('.nobold').forEach((n,i)=>add(n,'interval '+i));
+            add(document.querySelector('#holdup-button-cell > .nobold'), 'HoldUp interval');
+            document.querySelectorAll('#middle button[data-ease],#holdup-button,#holdup-interval')
+                .forEach((n,i)=>add(n,'button '+i));
+            const overlaps=[];
+            for(let i=0;i<blocks.length;i++) for(let j=i+1;j<blocks.length;j++) {
+                const a=blocks[i],b=blocks[j];
+                if(a.label===b.label) continue;
+                if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1
+                    && Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1) overlaps.push([a,b]);
+            }
+            return overlaps;
+        })()"""
+        try:
+            wait(lambda: not js(expression), "counts, waiting text, intervals and labels do not overlap", seconds=4)
+        except AssertionError:
+            print("TEXT OVERLAPS", js(expression), flush=True)
+            raise
 
     try:
         wait(lambda: mw.col is not None and mw.state == "deckBrowser" and loaded(), "profile")
@@ -154,6 +189,34 @@ def main(base, archive, source, order, style):
         assert snapshot(first) == before
         wait(lambda: js("document.querySelector('#holdup-button').disabled"), "scheduled checkmark")
         assert js("Array.from(document.querySelectorAll('#middle button[data-ease]')).map(b=>[b.dataset.ease,b.getAttribute('style'),getComputedStyle(b).color])") == native_styles
+        wait(lambda: js("document.querySelector('#holdup-waiting')?.dataset.waiting === '1'"), "visible waiting status")
+        # Match both user screenshots: a pending appearance, and an appearance
+        # already ready while the original's answer is still open. Only the
+        # GUI clock advances; the actual card schedule and appointment stay put.
+        import holdup.gui as gui_module
+        real_clock = gui_module.now_ms
+        try:
+            for ready in [False, True]:
+                gui_module.now_ms = (lambda: queue.for_card(first)[0].due_ms + 1) if ready else real_clock
+                runtime.flow.update_counts()
+                wait(lambda: js(f"document.querySelector('#holdup-waiting')?.dataset.ready === '{int(ready)}'"), "ready status")
+                for width, zoom, font in [(1100, 1, 15), (900, 1.5, 20), (1600, 2, 20)]:
+                    mw.resize(width, 850)
+                    js(f"""document.body.style.zoom={zoom};
+                        document.documentElement.style.fontSize='{font}px';
+                        window.holdupLayoutReady=false;
+                        requestAnimationFrame(()=>requestAnimationFrame(()=>window.holdupLayoutReady=true)); true""")
+                    wait(lambda: js("window.holdupLayoutReady"), "resized layout painted")
+                    assert float(js("getComputedStyle(document.body).zoom")) == zoom
+                    assert js("getComputedStyle(document.documentElement).fontSize") == f"{font}px"
+                    check_text_layout()
+                    mw.grab().save(str(base / f"scheduled-ready-{int(ready)}-{width}.png"))
+        finally:
+            gui_module.now_ms = real_clock
+            runtime.flow.update_counts()
+            js("document.body.style.zoom=1; document.documentElement.style.removeProperty('font-size'); true")
+            mw.resize(1100, 850)
+        assert snapshot(first) == before
         # Keyboard ratings remain valid even when the user hides their buttons.
         mw.reviewer._answerCard(4)
         wait(lambda: mw.reviewer.state == "question" and mw.reviewer.card.id != first and loaded(), "native rating")
@@ -173,9 +236,10 @@ def main(base, archive, source, order, style):
         queue.enqueue(first, 1, time.time_ns() // 1_000_000 - 2000)
         runtime._overview_count = None
         runtime.refresh()
-        wait(lambda: loaded() and js("document.body.textContent.includes('Continue studying')"), "Continue studying with custom overview renderer")
-        assert js("Array.from(document.querySelectorAll('button')).filter(b=>b.textContent.includes('Continue studying')).length") == 1
-        js("Array.from(document.querySelectorAll('button')).find(b=>b.textContent.includes('Continue studying')).click(); true")
+        continue_label = json.dumps("Продолжить изучение" if language == "ru" else "Continue studying")
+        wait(lambda: loaded() and js(f"document.body.textContent.includes({continue_label})"), "Continue studying with custom overview renderer")
+        assert js(f"Array.from(document.querySelectorAll('button')).filter(b=>b.textContent.includes({continue_label})).length") == 1
+        js(f"Array.from(document.querySelectorAll('button')).find(b=>b.textContent.includes({continue_label})).click(); true")
         wait(lambda: mw.state == "review" and runtime.flow.active is not None and mw.reviewer.state == "question" and loaded(), "practice question")
         request = runtime.flow.active
         show_answer()
@@ -196,7 +260,7 @@ def main(base, archive, source, order, style):
         assert snapshot(first) == native_first and snapshot(second) == native_second
         assert len(col.find_cards("")) == 2
         mw.grab().save(str(base / "compatibility.png"))
-        print(f"PASS compatibility: {order}, {style}; native ratings, original Undo, extra practice, Repeat/Done Undo, no extra FSRS logs", flush=True)
+        print(f"PASS compatibility: {language}, {order}, {style}; native ratings, original Undo, extra practice, Repeat/Done Undo, no extra FSRS logs", flush=True)
     finally:
         if mw.col is not None:
             watchdog = QTimer()
@@ -210,4 +274,4 @@ def main(base, archive, source, order, style):
 
 
 if __name__ == "__main__":
-    main(*(Path(x) for x in sys.argv[1:4]), *sys.argv[4:6])
+    main(*(Path(x) for x in sys.argv[1:4]), *sys.argv[4:7])

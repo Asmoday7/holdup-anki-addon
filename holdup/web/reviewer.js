@@ -45,7 +45,16 @@
             box-sizing: border-box;
             width: var(--holdup-action-width, auto);
         }
-        #holdup-button-cell > .nobold { display: block; }
+        /* Custom bars put captions directly in table cells. Anki positions
+           .nobold absolutely for captions inside buttons; outside a button
+           that lets them escape upward into our queue status. Reserve their
+           height in normal flow, without changing captions inside buttons. */
+        #middle td > .nobold {
+            position: static;
+            transform: none;
+            display: block;
+            margin-bottom: 4px;
+        }
         #holdup-practice-actions {
             display: flex;
             flex-wrap: wrap;

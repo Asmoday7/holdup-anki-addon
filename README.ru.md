@@ -30,9 +30,10 @@
 [Результаты проверок](release/VALIDATION.md) ·
 [Проверки GitHub](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
-Для Advanced Review Bottombar подготовлен **[кандидат 1.0.1-rc.1](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.1.ankiaddon)**:
-исправлены скрытые кнопки оценок, нестандартная разметка вопроса, запуск отдельной
-практики и кнопка «Продолжить изучение». Подробнее — [проверки совместимости](release/BOTTOMBAR_COMPATIBILITY.md).
+Для Advanced Review Bottombar подготовлен **[кандидат 1.0.1-rc.2](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.2.ankiaddon)**:
+исправлены наложение счётчика на интервалы, скрытые кнопки оценок, нестандартная
+разметка вопроса, запуск отдельной практики и кнопка «Продолжить изучение».
+Подробнее — [проверки совместимости](release/BOTTOMBAR_COMPATIBILITY.md).
 
 ## Установка
 
@@ -168,9 +169,11 @@ AnkiDroid не запускает Python-аддоны настольной Anki.
 Практика не передаёт оценок в FSRS, хотя может повлиять на память человека
 и его следующие обычные ответы.
 
-Перед публикацией запускаются **236 тестов в каждом из четырёх заданий** — Windows/Python 3.13
+Перед публикацией запускаются **253 теста в каждом из четырёх заданий** — Windows/Python 3.13
 и Linux/Python 3.12, Anki **26.09** и **26.09.3**. В каждом задании четыре GUI-сценария
 на русском/английском, с минутными шагами и без них, включая штатное завершение Anki.
+Дополнительно выполняются двенадцать проверок с Advanced Review Bottombar:
+оба языка и порядка загрузки, разные настройки кнопок.
 Публикация разрешена после успеха всех четырёх заданий.
 [Результаты проверок](release/VALIDATION.md) · [Отчёт владельца](release/manual-validation.json).
 

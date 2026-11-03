@@ -15,7 +15,8 @@ from tools.package_addon import build_addon
 @pytest.mark.skipif(find_spec("aqt") is None, reason="Install requirements-gui.txt")
 @pytest.mark.parametrize("order", ["before", "after"])
 @pytest.mark.parametrize("style", ["default", "hidden", "wide"])
-def test_advanced_review_bottombar(tmp_path, order, style):
+@pytest.mark.parametrize("language", ["en", "ru"])
+def test_advanced_review_bottombar(tmp_path, order, style, language):
     source = os.environ.get("HOLDUP_BOTTOMBAR_SOURCE")
     if not source:
         pytest.skip("Set HOLDUP_BOTTOMBAR_SOURCE to the upstream add-on checkout")
@@ -35,7 +36,7 @@ def test_advanced_review_bottombar(tmp_path, order, style):
             result = subprocess.run(
                 [sys.executable, "-X", "faulthandler",
                  str(Path(__file__).with_name("bottombar_probe.py")),
-                 str(tmp_path / "profile"), str(archive), str(source), order, style],
+                 str(tmp_path / "profile"), str(archive), str(source), order, style, language],
                 env=env, stdout=output, stderr=subprocess.STDOUT,
                 timeout=int(os.environ.get("HOLDUP_GUI_TIMEOUT", "180")),
             )
