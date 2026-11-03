@@ -45,9 +45,11 @@ class ReviewFlow:
         self._practice_refresh = False
         self.reviewer._holdup_practice = False
         self._original = {}
+        self._original_class_methods = {}
         for name, replacement in (
             ("nextCard", self.next_card),
             ("_get_next_v3_card", self.select),
+            ("_remaining", self.remaining),
             ("_showAnswerButton", self.question_buttons),
             ("_showEaseButtons", self.answer_buttons),
             ("_run_state_mutation_hook", self.mutation),
@@ -56,6 +58,7 @@ class ReviewFlow:
             ("onEnterKey", self.enter),
         ):
             self._original[name] = getattr(self.reviewer, name)
+            self._original_class_methods[name] = getattr(type(self.reviewer), name, None)
             setattr(self.reviewer, name, replacement)
         gui_hooks.reviewer_will_answer_card.append(self.guard_rating)
         gui_hooks.reviewer_did_answer_card.append(self.native_answered)
@@ -68,6 +71,18 @@ class ReviewFlow:
         gui_hooks.webview_did_receive_js_message.append(self.message)
         gui_hooks.overview_will_render_bottom.append(self.overview_bottom)
         gui_hooks.webview_will_set_content.append(self.overview_content)
+
+    def _call_original(self, name):
+        original = self._original[name]
+        previous = getattr(self, "_original_class_methods", {}).get(name)
+        current = getattr(type(self.reviewer), name, None)
+        # A later-loaded add-on can replace Reviewer class methods after we
+        # captured a bound method. Use that replacement for native rendering,
+        # while retaining any explicit instance wrapper already present.
+        if (previous is not None and getattr(original, "__func__", None) is previous
+                and current is not previous and callable(current)):
+            return current(self.reviewer)
+        return original()
 
     def clear(self, *_args):
         self.active = self.collection = self.token = None
@@ -106,14 +121,14 @@ class ReviewFlow:
 
     def next_card(self):
         if not self._defer_native_advance:
-            return self._original["nextCard"]()
+            return self._call_original("nextCard")
         self._defer_native_advance = False
         collection, card = self.mw.col, self.reviewer.card
 
         def advance():
             if (self.mw.col is collection and self.mw.state == "review"
                     and self.reviewer.card is card and self.reviewer.state == "transition"):
-                self._original["nextCard"]()
+                self._call_original("nextCard")
 
         # The answer is already recorded. Navigate after its operation hooks,
         # so the last native card cannot render the congrats page twice.
@@ -205,7 +220,7 @@ class ReviewFlow:
                 self._defer_native_advance = False
                 self._native_advance = None
                 self._undo_info = self._undo_card_id = None
-                self._original["nextCard"]()
+                self._call_original("nextCard")
 
         QTimer.singleShot(0, lambda: QTimer.singleShot(0, recover))
 
@@ -268,7 +283,7 @@ class ReviewFlow:
         # An external operation/Undo may refresh an unfinished practice card.
         current = self.active if self.collection is self.mw.col and self.active in ready else None
         r._holdup_practice = False
-        self._original["_get_next_v3_card"]()
+        self._call_original("_get_next_v3_card")
         self._native_counts = (list(r._v3.counts()[1]) if r._v3 is not None
                                else list(self.mw.col.sched.counts()))
         # Anki restored a native answer. Keep its original on screen until it
@@ -338,9 +353,17 @@ class ReviewFlow:
             return badge + text
         return text
 
+    def remaining(self):
+        # Custom bottom HTML may call this while a practice-only reviewer is
+        # being initialized. Practice has no native scheduling states; its
+        # real counts are rendered separately by update_counts().
+        if self.reviewer._holdup_practice:
+            return ""
+        return self._call_original("_remaining")
+
     def question_buttons(self):
         if not self.active:
-            self._original["_showAnswerButton"]()
+            self._call_original("_showAnswerButton")
             self.update_counts()
             return
         self.token = None
@@ -355,7 +378,7 @@ class ReviewFlow:
 
     def answer_buttons(self):
         if not self.active:
-            self._original["_showEaseButtons"]()
+            self._call_original("_showEaseButtons")
             self.update_counts()
             return
         self.token = secrets.token_urlsafe(18)
@@ -381,24 +404,30 @@ class ReviewFlow:
         if self.active:
             self.reviewer._states_mutated = True
         else:
-            return self._original["_run_state_mutation_hook"]()
+            return self._call_original("_run_state_mutation_hook")
 
     def auto_answer(self):
         if not self.active:
-            return self._original["_auto_advance_to_answer_if_enabled"]()
+            return self._call_original("_auto_advance_to_answer_if_enabled")
 
     def auto_question(self):
         if not self.active:
-            return self._original["_auto_advance_to_question_if_enabled"]()
+            return self._call_original("_auto_advance_to_question_if_enabled")
 
     def enter(self):
         if self.active and self.reviewer.state == "answer":
             if self.mw.pm.spacebar_rates_card():
                 self.act("repeat")
         else:
-            return self._original["onEnterKey"]()
+            return self._call_original("onEnterKey")
 
     def message(self, handled, message, context):
+        if (not handled[0] and message == "holdup-continue"
+                and isinstance(context, OverviewBottomBar)
+                and context.overview is self.mw.overview):
+            if self.mw.state == "overview":
+                self.runtime.open_practice()
+            return (True, None)
         if handled[0] or not message.startswith(PREFIX):
             return handled
         if not isinstance(context, ReviewerBottomBar) or context.reviewer is not self.reviewer:
@@ -463,6 +492,16 @@ class ReviewFlow:
         # Remember it so the polling callback does not immediately replace the
         # same bottom page a second time during initial overview navigation.
         self.runtime._overview_count = (ready, len(requests))
+        # Some custom overview renderers omit overview_will_render_bottom.
+        # Keep their existing buttons and supply our own action only if the
+        # standard hook did not already add it. The bridge hook above handles
+        # this command even when their renderer also replaces the link handler.
+        if ready and "holdup-continue" not in content.body:
+            content.body += (
+                '<button id="holdup-continue" type="button" '
+                'onclick="pycmd(\'holdup-continue\')">'
+                + escape(tr("Continue studying")) + '</button>'
+            )
         if requests:
             content.body += (
                 '<div id="holdup-overview-status" role="status" '

@@ -25,8 +25,15 @@ jobs:
       QTWEBENGINE_CHROMIUM_FLAGS: --disable-gpu --no-sandbox
       HOLDUP_GUI_TIMEOUT: "180"
       PYTHONUTF8: "1"
+      HOLDUP_BOTTOMBAR_SOURCE: .dev/compat/advanced-review-bottombar
     steps:
       - uses: actions/checkout@v5
+      - name: Check out the tested Advanced Review Bottombar source
+        uses: actions/checkout@v5
+        with:
+          repository: noobj2/Anki-Advanced-Review-Bottombar
+          ref: 7fd5c16090b5b7c0e2f26d040a6552680d29684c
+          path: .dev/compat/advanced-review-bottombar
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ startsWith(matrix.os, 'windows') && '3.13' || '3.12' }}
@@ -64,7 +71,9 @@ jobs:
             .dev/ci-results.xml
             .dev/queue-benchmark.json
             .dev/ci-tests/**/desktop.log
+            .dev/ci-tests/**/compatibility.log
             .dev/ci-tests/**/anki-profile/*.png
+            .dev/ci-tests/**/profile/*.png
           if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         with:

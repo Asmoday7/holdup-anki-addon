@@ -30,6 +30,10 @@
 [Результаты проверок](release/VALIDATION.md) ·
 [Проверки GitHub](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
+Для Advanced Review Bottombar подготовлен **[кандидат 1.0.1-rc.1](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.1.ankiaddon)**:
+исправлены скрытые кнопки оценок, нестандартная разметка вопроса, запуск отдельной
+практики и кнопка «Продолжить изучение». Подробнее — [проверки совместимости](release/BOTTOMBAR_COMPATIBILITY.md).
+
 ## Установка
 
 Если уже установлена другая копия этого аддона, отключите её через

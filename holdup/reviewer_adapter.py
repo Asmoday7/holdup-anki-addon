@@ -187,7 +187,7 @@ def install(mw: Any) -> bool:
     )
     context_type = getattr(reviewer_module, "ReviewerBottomBar", None)
     flow_methods = (
-        "nextCard", "_get_next_v3_card", "_showAnswerButton", "_showEaseButtons",
+        "nextCard", "_get_next_v3_card", "_remaining", "_showAnswerButton", "_showEaseButtons",
         "_run_state_mutation_hook", "_auto_advance_to_answer_if_enabled",
         "_auto_advance_to_question_if_enabled", "_clear_auto_advance_timers",
         "onEnterKey",

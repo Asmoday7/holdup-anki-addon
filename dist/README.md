@@ -2,6 +2,11 @@
 
 Стабильная версия — **[holdup-1.0.0.ankiaddon](https://github.com/Asmoday7/holdup-anki-addon/releases/download/v1.0.0/holdup-1.0.0.ankiaddon)**.
 
+Кандидат с исправлениями совместимости с Advanced Review Bottombar —
+**[holdup-1.0.1-rc.1.ankiaddon](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.1.ankiaddon)**.
+Он устанавливается тем же способом поверх существующей копии HoldUp.
+[Что исправлено и как проверено](../release/BOTTOMBAR_COMPATIBILITY.md).
+
 **HoldUp - Отправь карточку и в FSRS, и отдельную очередь!**
 
 Русский и английский интерфейсы входят в один пакет. Язык выбирается по настройкам

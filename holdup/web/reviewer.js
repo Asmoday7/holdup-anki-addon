@@ -22,7 +22,7 @@
             text-align: center;
             white-space: nowrap;
         }
-        #middle.holdup-counts-visible #ansbut .stattxt { display: none; }
+        #middle.holdup-counts-visible .stattxt { display: none; }
         #holdup-waiting {
             font-size: small;
             line-height: 1.4;
@@ -45,6 +45,7 @@
             box-sizing: border-box;
             width: var(--holdup-action-width, auto);
         }
+        #holdup-button-cell > .nobold { display: block; }
         #holdup-practice-actions {
             display: flex;
             flex-wrap: wrap;
@@ -80,8 +81,10 @@
         if (!middle) return;
         let bar = document.getElementById("holdup-queue-counts");
         let status = document.getElementById("holdup-waiting");
+        const question = Array.from(middle.querySelectorAll("button")).find(button =>
+            button.id === "ansbut" || /\bpycmd\s*\(\s*(['"])ans\1\s*\)/.test(button.getAttribute("onclick") || ""));
         const matches = counts && (counts.phase === "question"
-            ? middle.querySelector("#ansbut")
+            ? question
             : middle.querySelector("button[data-ease], #holdup-practice-actions"));
         middle.classList.toggle("holdup-counts-visible", Boolean(matches));
         if (!matches) {
@@ -133,18 +136,39 @@
     function render() {
         renderCounts();
         let cell = document.getElementById(cellId);
+        let controls = document.getElementById("holdup-controls-table");
         const hasOwnUI = cell || document.getElementById("holdup-practice-actions")
             || document.getElementById("holdup-practice-question");
-        document.body.classList.toggle("holdup-compact", Boolean(hasOwnUI) && document.body.clientWidth < 583);
-        const good = document.querySelector('#middle button[data-ease="3"]');
-        const easy = document.querySelector('#middle button[data-ease="4"]');
-        const row = good?.closest("tr");
-        if ((!token && !pending && !scheduled) || !row || easy?.closest("tr") !== row) {
+        const nativeShell = Boolean(document.getElementById("time")?.closest("button"));
+        document.body.classList.toggle("holdup-compact", Boolean(hasOwnUI) && nativeShell && document.body.clientWidth < 583);
+        const nativeButtons = Array.from(document.querySelectorAll("#middle button[data-ease]"));
+        const good = nativeButtons.find(button => button.dataset.ease === "3") || nativeButtons[0];
+        const nativeRow = good?.closest("tr");
+        if ((!token && !pending && !scheduled) || !nativeRow) {
             cell?.remove();
+            controls?.remove();
             document.querySelectorAll(".holdup-answer-row, .holdup-answer-table").forEach(el => {
                 el.classList.remove("holdup-answer-row", "holdup-answer-table");
             });
             return;
+        }
+        const nativeTable = nativeRow.closest("table");
+        // A custom table owns its declared sizing (including wide buttons).
+        // Put our controls below it instead of rewriting its rows or widths.
+        const separate = nativeTable.hasAttribute("width");
+        let row = nativeRow;
+        if (separate) {
+            if (!controls || controls.previousElementSibling !== nativeTable) {
+                controls?.remove();
+                controls = document.createElement("table");
+                controls.id = "holdup-controls-table";
+                controls.cellPadding = controls.cellSpacing = "0";
+                controls.insertRow();
+                nativeTable.after(controls);
+            }
+            row = controls.rows[0];
+        } else {
+            controls?.remove();
         }
         if (!cell || cell.parentElement !== row) {
             cell?.remove();
@@ -188,25 +212,30 @@
             });
             cell.appendChild(settings);
             row.appendChild(cell);
-            document.body.classList.toggle("holdup-compact", document.body.clientWidth < 583);
+            document.body.classList.toggle("holdup-compact", nativeShell && document.body.clientWidth < 583);
         }
         const button = cell.querySelector("#holdup-button");
         row.classList.add("holdup-answer-row");
         row.closest("table").classList.add("holdup-answer-table");
         row.style.removeProperty("--holdup-action-width");
-        button.style.font = getComputedStyle(good).font;
+        const nativeStyle = getComputedStyle(good);
+        button.style.font = nativeStyle.font;
+        button.style.padding = nativeStyle.padding;
         button.style.height = good.offsetHeight + "px";
         const width = Math.max(button.offsetWidth, ...Array.from(
-            row.querySelectorAll("button[data-ease]"), b => b.offsetWidth));
+            nativeButtons, b => b.offsetWidth));
         row.style.setProperty("--holdup-action-width", width + "px");
         const settings = cell.querySelector("#holdup-interval");
+        settings.style.font = nativeStyle.font;
+        settings.style.padding = "0";
         settings.style.width = settings.style.height = good.offsetHeight + "px";
         button.dataset.token = token;
         button.title = (studyDay ? tr("Extra practice at the start of the next Anki study day.")
             : tr("Extra practice in {interval}.", {interval: intervalLabel})) + " " +
             tr("No FSRS rating is recorded. The original stays in Anki: choose a normal rating separately.")
             + " " + tr("Each press adds a separate extra appearance.");
-        const caption = button.querySelector(".nobold");
+        const caption = cell.querySelector(".nobold");
+        if (separate && caption.parentElement !== cell) cell.prepend(caption);
         button.disabled = pending || scheduled;
         cell.querySelector('#holdup-interval').disabled = pending || scheduled;
         const text = (scheduled ? "✓ " : "") + intervalLabel;
@@ -278,6 +307,7 @@
             });
             document.removeEventListener("DOMContentLoaded", observe);
             document.getElementById(cellId)?.remove();
+            document.getElementById("holdup-controls-table")?.remove();
         },
     };
 })();

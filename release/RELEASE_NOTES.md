@@ -1,37 +1,22 @@
-# HoldUp 1.0.0
+# HoldUp 1.0.1-rc.1
 
-The first stable release of HoldUp: schedule another look at a card while keeping
-its normal Anki/FSRS review. Show the answer, press HoldUp, then give the original
-your normal Again, Hard, Good or Easy rating.
+Compatibility candidate for Advanced Review Bottombar (AnkiWeb 1136455830).
 
-- Extra practice appears in the same reviewer, with no separate window.
-- Choose 1 second to 24 hours, or the next Anki study day using Anki's day-start setting.
-- Every HoldUp press adds an independent appearance. Earlier appointments keep their deadlines.
-- Repeat and Done affect only the extra appearance on screen, without submitting an FSRS rating.
-- Native ratings, daily new-card limits and Undo/Redo remain available.
-- Ready counts and deck-list clock badges make extra practice visible.
-- English and Russian are included in one package and follow Anki's language.
-- Existing HoldUp appointments are preserved when upgrading.
+- HoldUp stays available when Good, Hard or Easy buttons are hidden.
+- Question counts work with renamed/restyled Show Answer buttons and are not duplicated.
+- Custom answer-table widths and wide button layouts remain under the other add-on's control.
+- Native question rendering respects either add-on load order.
+- Ready practice retains a Continue studying action when the deck overview is customized.
+- Starting a practice-only session no longer makes the custom bottom bar read nonexistent native scheduling states.
 
-Runtime code is unchanged from 1.0.0-rc.3, apart from the version number.
-On 30 October 2026 the owner reported completing all requested manual checks
-after approximately a week of use and approved stable publication.
-The attached validation JSON records this attributed report separately from the
-actual Windows/Linux CI results for Anki 26.09 and 26.09.3.
+Tests load the actual Advanced Review Bottombar source and exercise default,
+hidden-button and wide-button configurations in both load orders, including
+normal ratings, original Undo, Repeat/Done Undo and unchanged native review logs
+through extra practice. See [compatibility evidence](BOTTOMBAR_COMPATIBILITY.md).
 
-Install `holdup-1.0.0.ankiaddon` through **Tools → Add-ons → Install from file**, then
-restart Anki. Keep one enabled copy. Upload the same `.ankiaddon` to AnkiWeb;
-the identical `.zip` is available if the upload form explicitly requires ZIP.
+Install `holdup-1.0.1-rc.1.ankiaddon` through **Tools → Add-ons → Install from file**
+and restart Anki. Keep one HoldUp copy enabled. Existing cards and extra-practice
+appointments are preserved; the queue data format is unchanged.
 
-Support is one desktop installation per collection. Full collection `.colpkg`
-exports and native backups preserve the queue; a deck `.apkg` does not transfer
-the complete queue. Live multi-device conflict resolution is unverified.
-AnkiDroid and AnkiMobile do not run this desktop add-on.
-
-Free and open source under AGPL-3.0-or-later. Source, license and project notice
-are included in the archive.
-
-[User guide](https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.md) ·
-[Русская инструкция](https://github.com/Asmoday7/holdup-anki-addon/blob/main/USER_GUIDE.ru.md) ·
-[Validation](https://github.com/Asmoday7/holdup-anki-addon/blob/main/release/VALIDATION.md) ·
-[Report a bug](https://github.com/Asmoday7/holdup-anki-addon/issues/new?template=bug_report.yml)
+This is a candidate for the compatibility fix. Stable 1.0.0 remains available.
+Real-device confirmation for this candidate has not yet been reported.

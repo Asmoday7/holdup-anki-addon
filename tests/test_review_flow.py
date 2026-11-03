@@ -442,3 +442,62 @@ def test_native_overview_render_records_counts_to_avoid_an_immediate_poll_redraw
     queue.enqueue(cid, 1, 1000)
     flow.overview_content(SimpleNamespace(body=""), OverviewBottomBar(flow.mw.overview))
     assert flow.runtime._overview_count == (1, 2)
+
+
+@pytest.mark.parametrize("preexisting", [False, True])
+def test_custom_overview_keeps_one_continue_action_and_its_own_content(col, monkeypatch, preexisting):
+    from aqt.overview import OverviewBottomBar
+
+    flow = flow_for(col, monkeypatch, clock=100000)
+    flow.mw.overview = object()
+    cid = col.find_cards("")[0]
+    PracticeQueue(col).enqueue(cid, 1, 1000)
+    original = '<button id="other-addon-action">Custom action</button>'
+    if preexisting:
+        original += '<button onclick="pycmd(\'holdup-continue\')">Continue studying</button>'
+    content = SimpleNamespace(body=original)
+    context = OverviewBottomBar(flow.mw.overview)
+    flow.overview_content(content, context)
+    assert content.body.startswith(original)
+    assert content.body.count('onclick="pycmd(\'holdup-continue\')"') == 1
+    assert 'holdup-overview-status' in content.body
+    calls = []
+    flow.runtime.open_practice = lambda: calls.append("open")
+    flow.mw.state = "overview"
+    assert flow.message((False, None), "holdup-continue", context) == (True, None)
+    assert calls == ["open"]
+    flow.message((True, None), "holdup-continue", context)
+    flow.mw.state = "review"
+    flow.message((False, None), "holdup-continue", context)
+    assert calls == ["open"]
+
+
+@pytest.mark.parametrize("instance_wrapper", [False, True])
+def test_late_class_renderer_is_used_without_discarding_an_existing_instance_wrapper(monkeypatch, instance_wrapper):
+    from types import MethodType
+
+    class Reviewer:
+        def render(self):
+            return "native"
+
+    reviewer = Reviewer()
+    previous_class = Reviewer.render
+    if instance_wrapper:
+        reviewer.render = MethodType(lambda self: "existing instance wrapper", reviewer)
+    flow = ReviewFlow.__new__(ReviewFlow)
+    flow.reviewer = reviewer
+    flow._original = {"render": reviewer.render}
+    flow._original_class_methods = {"render": previous_class}
+    monkeypatch.setattr(Reviewer, "render", lambda self: "late class renderer")
+    assert flow._call_original("render") == (
+        "existing instance wrapper" if instance_wrapper else "late class renderer")
+
+
+def test_custom_bottom_html_can_request_remaining_counts_without_native_scheduling_states():
+    flow = ReviewFlow.__new__(ReviewFlow)
+    flow.reviewer = SimpleNamespace(_holdup_practice=True, _v3=None)
+    native_calls = []
+    flow._original = {"_remaining": lambda: native_calls.append(True) or "native counts"}
+    assert flow.remaining() == "" and native_calls == []
+    flow.reviewer._holdup_practice = False
+    assert flow.remaining() == "native counts" and native_calls == [True]

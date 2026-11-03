@@ -53,6 +53,7 @@ def build(reports: Path, destination: Path) -> None:
                 or not measurements.get("python", "").startswith(expected_python)):
             raise ValueError("Reported platform/Anki/Python does not match the CI job")
         cases.append({"job": name, "passed": check(str(report)), "packaged_gui_cases": 4,
+                      "bottombar_gui_cases": 6,
                       "queue_benchmark": measurements})
     record = {"version": version, "release_type": "candidate" if "-rc." in version else "stable",
               "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),

@@ -15,8 +15,12 @@ def check(path: str) -> int:
            if case.attrib.get("name", "").startswith("test_packaged_button_in_desktop_anki[")]
     if len(gui) != 4:
         raise ValueError("All four packaged desktop scenarios must run")
+    compatibility = [case for case in root.iter("testcase")
+                     if case.attrib.get("name", "").startswith("test_advanced_review_bottombar[")]
+    if len(compatibility) != 6:
+        raise ValueError("All six Advanced Review Bottombar scenarios must run")
     return count
 
 
 if __name__ == "__main__":
-    print(f"Release test report: {check(sys.argv[1])} passed, including four desktop scenarios")
+    print(f"Release test report: {check(sys.argv[1])} passed, including four desktop and six compatibility scenarios")

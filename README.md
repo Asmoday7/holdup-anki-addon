@@ -28,6 +28,10 @@ approximately a week of use on 30 October 2026.
 [Validation record](release/VALIDATION.md) ·
 [GitHub checks](https://github.com/Asmoday7/holdup-anki-addon/actions/workflows/ci.yml).
 
+Using Advanced Review Bottombar? The **[1.0.1-rc.1 compatibility candidate](https://raw.githubusercontent.com/Asmoday7/holdup-anki-addon/main/dist/holdup-1.0.1-rc.1.ankiaddon)**
+fixes hidden rating buttons, custom question layouts, practice-only startup and
+the Continue studying action. See the [compatibility checks](release/BOTTOMBAR_COMPATIBILITY.md).
+
 ## Install
 
 If another copy of this add-on is installed, disable it in **Tools → Add-ons**
